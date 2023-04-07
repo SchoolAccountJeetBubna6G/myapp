@@ -58,7 +58,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<TextArea mode={mode} heading={"Enter your text here!"} />}
+            element={<TextArea mode={mode} heading={"Enter your text here!"} showAlert={showAlert}/>}
           ></Route>
 
           <Route

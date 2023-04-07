@@ -56,6 +56,13 @@ export default function TextArea(props) {
     setText(event.target.value);
   };
 
+  const handleCopy = () => {
+    let copyText = document.getElementById('exampleFormControlTextarea1');
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    props.showAlert("Copied the text!", "success")
+  }
+
   return (
     <div style={{color: props.mode === "dark" ? "white" : "black"}}>
       <div className="container">
@@ -83,6 +90,9 @@ export default function TextArea(props) {
         </button>
         <button className="btn btn-primary mx-2 my-2" onClick={handleAnyCase}>
           Any Case
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}>
+          Copy to clipboard
         </button>
       </div>
 
