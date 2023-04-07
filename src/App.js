@@ -2,13 +2,15 @@ import "./App.css";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextArea from "./components/TextArea";
+import AboutUs from "./components/AboutUs";
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
 
-  let bgColor = "grey";
+  let bgColor = "black";
 
   const showAlert = (message, type) => {
     setAlert({
@@ -23,7 +25,7 @@ function App() {
   const ToggleMode = () => {
     if (mode === "light") {
       setMode("dark");
-      document.body.style.backgroundColor = "black";  
+      document.body.style.backgroundColor = "black";
       showAlert("Success! Dark mode enabled!", "success");
     } else if (mode === "dark") {
       setMode("light");
@@ -33,32 +35,42 @@ function App() {
   };
 
   const ToggleGrey = () => {
-    if(bgColor === "black")
-    {
+    if (bgColor === "black") {
       document.body.style.backgroundColor = "#424242";
       bgColor = "grey";
-      
-    }else if(bgColor === 'grey'){
+    } else if (bgColor === "grey") {
       document.body.style.backgroundColor = "black";
-      bgColor = 'black';
+      bgColor = "black";
     }
-  }
+  };
 
   return (
     <>
-      <Navbar
-        title="TextUtils"
-        about="About TextUtils"
-        mode={mode}
-        toggleMode={ToggleMode}
-        toggleGrey={ToggleGrey}
-      />
+      <BrowserRouter>
+        <Navbar
+          title="TextUtils"
+          about="About TextUtils"
+          mode={mode}
+          toggleMode={ToggleMode}
+          toggleGrey={ToggleGrey}
+        />
+        <Alert alert={alert} />
+        <Routes>
+          <Route
+            path="/"
+            element={<TextArea mode={mode} heading={"Enter your text here!"} />}
+          ></Route>
 
-      <Alert alert={alert} />
-
-      <div className="container my-3">
-        <TextArea heading="Enter the text to analyze below" mode={mode} />
-      </div>
+          <Route
+            path="/about"
+            element={
+              <div className="container my-3">
+                <AboutUs />
+              </div>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

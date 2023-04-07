@@ -125,9 +125,6 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-      <button type="button" className="btn btn-primary" onClick={switchMode}>
-        {btnText}
-      </button>
     </div>
   );
 }
